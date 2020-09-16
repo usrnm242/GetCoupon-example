@@ -1,0 +1,41 @@
+{
+ "forbidden_promocodes": [
+  "lowc",
+  "brainymama",
+  "free_coupons",
+  "halya",
+  "халяв",
+  "ozond",
+  "wowsale"
+ ],
+ "forbidden_shop_names": [
+  "App Store",
+  "Apple",
+  "Redirecting",
+  "hskwq.com",
+  "1xBet",
+  "Facebook",
+  "admitad",
+  "СПб",
+  "stvkr.com",
+  "Google Play"
+ ],
+ "forbidden_shop_links": [
+  "https://apps.apple.com",
+  "https://1x-bet92081.com",
+  "https://comss.ru",
+  "https://vk.com",
+  "https://rozoviykrolik.ru",
+  "https://stvkr.com",
+  "https://play.google.com/store",
+  "https://play.google.com"
+ ],
+ "same_websites": {
+  "https://best.aliexpress.ru": "https://ru.aliexpress.com",
+  "https://mbest.aliexpress.ru": "https://ru.aliexpress.com",
+  "https://aliexpress.ru": "https://ru.aliexpress.com",
+  "https://hd.kinopoisk.ru": "https://kinopoisk.ru",
+  "https://perekrestok-dostavka.ru": "https://perekrestok.ru",
+  "https://shein.com": "https://ru.shein.com"
+ }
+}
