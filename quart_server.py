@@ -10,14 +10,14 @@ from database import users
 app = Quart(__name__)
 
 
-API_ID =
-API_HASH = ''
-SESSION = ''
+API_ID = 0
+API_HASH = 'secret'
+SESSION = 'secret'
 
 
 def is_user_valid(headers) -> bool:
     if headers.get('Remote-Addr', "") != constants.nginx_host or \
-            headers.get('Callback-Header', "") != "":
+            headers.get('Callback-Header', "") != "secret":
         return False
     else:
         return True
@@ -74,7 +74,6 @@ async def post_promocode():
     return 'ok'
 
 
-# curl -d '{"feedback":"lolkek cheburek"}' -H "Content-Type: application/json" -X POST http://localhost:8686/feedback
 @app.route('/feedback', methods=['POST'])
 async def post_feedback():
 
