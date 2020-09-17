@@ -10,18 +10,12 @@ from slovnet import NER
 
 import constants
 
-ru_common_words = ("что", "но", "их", "с", "со", "все", "за", "по",
-                   "не", "от", "для", "на", "или", "это", "где",
-                   "вот", "так", "был", "то", "из", "чтобы", "быть", "можно",
-                   "ещё", "как", "во", "если", "бы", "мы", "вы", "ли", "нас",
-                   "могу", "его", "хотя", "им", "эту", "её",)
-
-common_words_pattern = r"( " + r" )|( ".join(ru_common_words) + r" )"
-
-no_needed_words = set(["онлайн", "com", "ташир", "официальный", "сайт",
-                       "минута", "ru", "купить", "выгодная", "отзыв", "цена",
-                       "представить", "через", "широкий", "удобный",
-                       "интернет", "магазин", "россия", ])
+no_needed_words4tags = set(
+    ["онлайн", "com", "ташир", "официальный", "сайт",
+     "минута", "ru", "купить", "выгодная", "отзыв", "цена",
+     "представить", "через", "широкий", "удобный",
+     "интернет", "магазин", "россия", ]
+)
 
 
 morph = MorphAnalyzer()
@@ -36,7 +30,6 @@ class PromoML(ABC):
         text = text.lower()
         text = re.sub(r"[^а-яёА-ЯЁ ]", " ", text)
         text = re.sub(r" [а-яёЁА-Я] ", " ", text)
-        text = re.sub(common_words_pattern, " ", text)
         text = re.sub(r" +", " ", text)
         return text
 
@@ -138,7 +131,7 @@ class TagsGetter(PromoML):
         description = self.clear_text(self.text)
         tags = self._tags_morph(description)
         tags = set(tags)
-        tags = list(tags - no_needed_words)
+        tags = list(tags - no_needed_words4tags)
         return tags
 
 

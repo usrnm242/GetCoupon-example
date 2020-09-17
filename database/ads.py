@@ -14,36 +14,32 @@ def append_ads(image_path: str,
                priority: int,
                days_valid_since_today: int
                ) -> bool:
-    try:
-        conn = get_connection()
-        with conn:
-            cur = conn.cursor()
-            with cur:
-                cur.execute("""SELECT category FROM categories
-                               ORDER BY priority DESC; """)
+    conn = get_connection()
+    with conn:
+        cur = conn.cursor()
+        with cur:
+            cur.execute("""SELECT category FROM categories
+                           ORDER BY priority DESC; """)
 
-                categories = list(map(lambda c: c[0], cur.fetchall()))
+            categories = list(map(lambda c: c[0], cur.fetchall()))
 
-                insert_after_category_index: int = categories.index(category)
+            insert_after_category_index: int = categories.index(category)
 
-                expiration_date = datetime.now() + \
-                    timedelta(days=days_valid_since_today)
+            expiration_date = datetime.now() + \
+                timedelta(days=days_valid_since_today)
 
-                query = """INSERT INTO ads
-                           (insert_after_category_index, ads_image, priority,
-                            expiration_date, website)
-                           VALUES (%s, %s, %s, %s, %s); """
+            query = """INSERT INTO ads
+                       (insert_after_category_index, ads_image, priority,
+                        expiration_date, website)
+                       VALUES (%s, %s, %s, %s, %s); """
 
-                args = (insert_after_category_index, image_path, priority,
-                        expiration_date.strftime('%Y-%m-%d %H:%M:%S'),
-                        website,)
+            args = (insert_after_category_index, image_path, priority,
+                    expiration_date.strftime('%Y-%m-%d %H:%M:%S'),
+                    website,)
 
-                cur.execute(query, args)
+            cur.execute(query, args)
 
         return True
-
-    except Exception as e:
-        return False
 
 
 def remove_ads(category_index: int, website_link: str) -> str:
